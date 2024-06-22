@@ -5,7 +5,6 @@ import CreatePlaylist from "./components/CreatePlaylist";
 import { initializePlaylist } from "./initialize";
 import Navbar from "./components/Navbar";
 import { MusicContext } from "./Context";
-import backgroundImage from './assets/images/background.png';
 
 function App() {
   const [keyword, setKeyword] = useState("");
@@ -89,18 +88,6 @@ function App() {
 
   return (
     <>
-        <div
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
-        backgroundPosition: 'center center',
-        minHeight: '100vh',
-        color: 'white',
-      }}
-    >
-        </div>
       <Navbar
         keyword={keyword}
         setKeyword={setKeyword}
