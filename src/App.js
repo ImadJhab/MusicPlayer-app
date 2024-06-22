@@ -146,7 +146,7 @@ function App() {
           <div className="col-12 py-5 text-center">
             <h1>
               <i className="bi bi-music-note-list mx-3"></i>
-              MusicPlayer-App
+              Yourmusic
             </h1>
             <h3 className="py-5">Discover music in 30 seconds</h3>
             <div>
