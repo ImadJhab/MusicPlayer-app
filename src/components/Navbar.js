@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MusicContext } from "../Context";
 import PinnedMusic from "./PinnedMusic";
@@ -10,12 +9,51 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
   const likedMusic = musicContext.likedMusic;
   const pinnedMusic = musicContext.pinnedMusic;
   const setResultOffset = musicContext.setResultOffset;
+
+  const fullText = "Your Best Music App";
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < fullText.length) {
+        setDisplayedText((prev) => prev + fullText[index]);
+        index++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+          setDisplayedText(""); // Clear text before starting again
+          index = 0;
+          startAnimation();
+        }, 2000); // Wait 2 seconds before restarting
+      }
+    }, 100);
+
+    const startAnimation = () => {
+      const newInterval = setInterval(() => {
+        if (index < fullText.length) {
+          setDisplayedText((prev) => prev + fullText[index]);
+          index++;
+        } else {
+          clearInterval(newInterval);
+          setTimeout(() => {
+            setDisplayedText("");
+            index = 0;
+            startAnimation();
+          }, 2000);
+        }
+      }, 100);
+    };
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <nav className="navbar navbar-dark navbar-expand-lg bg-dark sticky-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <i className="bi bi-music-note-list mx-3"></i> Your Favourite Music App
+            <i className="bi bi-music-note-list mx-3"></i> {displayedText}
           </Link>
           <div>
             <button
