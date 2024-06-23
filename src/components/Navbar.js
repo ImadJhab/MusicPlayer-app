@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { MusicContext } from "../Context";
 import PinnedMusic from "./PinnedMusic";
 import LikedMusic from "./LikedMusic";
+import "../styles/Navbar.css"; // Import the CSS file
 
 const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
   const musicContext = useContext(MusicContext);
@@ -15,37 +16,18 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
 
   useEffect(() => {
     let index = 0;
-    const interval = setInterval(() => {
-      if (index < fullText.length) {
-        setDisplayedText((prev) => prev + fullText[index]);
+    const updateText = () => {
+      if (index <= fullText.length) {
+        setDisplayedText(fullText.substring(0, index));
         index++;
       } else {
-        clearInterval(interval);
-        setTimeout(() => {
-          setDisplayedText(""); // Clear text before starting again
-          index = 0;
-          startAnimation();
-        }, 2000); // Wait 2 seconds before restarting
+        index = 0; // Reset index
       }
-    }, 100);
-
-    const startAnimation = () => {
-      const newInterval = setInterval(() => {
-        if (index < fullText.length) {
-          setDisplayedText((prev) => prev + fullText[index]);
-          index++;
-        } else {
-          clearInterval(newInterval);
-          setTimeout(() => {
-            setDisplayedText("");
-            index = 0;
-            startAnimation();
-          }, 2000);
-        }
-      }, 100);
+      setTimeout(updateText, 200); // Delay between updates
     };
+    updateText(); // Start the animation
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(updateText); // Clean up on unmount
   }, []);
 
   return (
@@ -53,9 +35,9 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
       <nav className="navbar navbar-dark navbar-expand-lg bg-dark sticky-top">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <i className="bi bi-music-note-list mx-3"></i> {displayedText}
+            <div className="animated-text">{displayedText}</div>
           </Link>
-          <div>
+          <div className="d-flex align-items-center">
             <button
               type="button"
               data-bs-toggle="modal"
@@ -75,7 +57,7 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
           </div>
 
           <div
-            className="collapse navbar-collapse d-flex justify-content-center"
+            className="collapse navbar-collapse d-flex justify-content-end"
             id="navbarSupportedContent"
           >
             <input

@@ -1,0 +1,24 @@
+.animated-text {
+    display: inline-block;
+    width: 180px; /* Adjust this width according to your design */
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .navbar .navbar-brand {
+    flex-grow: 1;
+  }
+  
+  .navbar .navbar-collapse {
+    flex-grow: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar .navbar-collapse {
+      flex-grow: 1;
+      justify-content: center;
+    }
+    .navbar .form-control {
+      width: 100%;
+    }
+  }
