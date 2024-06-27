@@ -5,6 +5,7 @@ import CreatePlaylist from "./components/CreatePlaylist";
 import { initializePlaylist } from "./initialize";
 import Navbar from "./components/Navbar";
 import { MusicContext } from "./Context";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [keyword, setKeyword] = useState("");
@@ -171,6 +172,7 @@ function App() {
       >
         <CreatePlaylist />
       </div>
+      <ScrollToTop visibilityHeight={300} />
     </>
   );
 }
