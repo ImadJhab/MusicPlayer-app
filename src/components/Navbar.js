@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MusicContext } from "../Context";
 import PinnedMusic from "./PinnedMusic";
 import LikedMusic from "./LikedMusic";
-import "../styles/Navbar.css"; // Import the CSS file
+import "../styles/Navbar.css";
 
 const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
   const musicContext = useContext(MusicContext);
@@ -23,11 +23,11 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
       } else {
         index = 0; // Reset index
       }
-      setTimeout(updateText, 200); // Delay between updates
+      setTimeout(updateText, 200);
     };
-    updateText(); // Start the animation
+    updateText();
 
-    return () => clearTimeout(updateText); // Clean up on unmount
+    return () => clearTimeout(updateText);
   }, []);
 
   return (
@@ -78,6 +78,9 @@ const Navbar = ({ keyword, handleKeyPress, setKeyword, fetchMusicData }) => {
             >
               Search
             </button>
+            <a href="/login.html" className="btn btn-outline-primary mx-2">
+              Login
+            </a>
           </div>
         </div>
       </nav>
