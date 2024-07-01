@@ -44,11 +44,19 @@ html, body {
 	margin: 5px 0;
   }
   
-  footer .contact-info div.first {
+  footer .contact-info div.first, footer .contact-info div.second {
 	text-align: center;
   }
-  
-  footer .contact-info div.second {
-	text-align: center;
+
+  footer .contact-info a {
+    font-size: 2rem;
+    color: #034bcf;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+	text-decoration: none;
   }
-  
+
+  footer .contact-info a:hover {
+    transform: scale(1.2);
+    color: #ffffff;
+  }
