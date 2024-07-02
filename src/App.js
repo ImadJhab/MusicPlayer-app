@@ -8,11 +8,13 @@ import { MusicContext } from "./Context";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
+  // State variables
   const [keyword, setKeyword] = useState("");
   const [message, setMessage] = useState("");
   const [tracks, setTracks] = useState([]);
   const [token, setToken] = useState(null);
 
+  // Context variables
   const musicContext = useContext(MusicContext);
   const isLoading = musicContext.isLoading;
   const setIsLoading = musicContext.setIsLoading;
@@ -21,6 +23,7 @@ function App() {
   const resultOffset = musicContext.resultOffset;
   const setResultOffset = musicContext.setResultOffset;
 
+  // Fetch music data from Spotify API
   const fetchMusicData = async () => {
     setTracks([]);
     window.scrollTo(0, 0);
@@ -48,7 +51,7 @@ function App() {
       setIsLoading(false);
     }
   };
-
+  // Handle enter key press to trigger search
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       setResultOffset(0);
@@ -56,10 +59,11 @@ function App() {
     }
   };
 
+  // Initialize component
   useEffect(() => {
     initializePlaylist();
 
-    // current client credentials will be deleted in few days
+    // Fetch Spotify API token
     const fetchToken = async () => {
       try {
         const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -82,11 +86,12 @@ function App() {
         setIsLoading(false);
       }
     };
+    // Load liked and pinned music from localStorage
     fetchToken();
     setLikedMusic(JSON.parse(localStorage.getItem("likedMusic")));
     setpinnedMusic(JSON.parse(localStorage.getItem("pinnedMusic")));
   }, [setIsLoading, setLikedMusic, setpinnedMusic]);
-
+  // Render UI
   return (
     <>
       <Navbar
